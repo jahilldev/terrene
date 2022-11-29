@@ -113,7 +113,7 @@ module.exports = ({ mode = 'development' }) => ({
     new HtmlWebpackPlugin({
       template: './src/index.html',
       templateParameters: {
-        siteTitle: 'Gafixal',
+        siteTitle: 'Terrene - by James Hill',
         overlayId: OVERLAY,
       },
     }),
