@@ -2,3 +2,4 @@ node_modules/
 dist/
 .idea/
 stats.json
+.DS_Store

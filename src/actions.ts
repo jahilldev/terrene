@@ -84,8 +84,6 @@ function animate() {
   }
 
   requestAnimationFrame(animate);
-
-  updateFluidTerrain();
   updateSpinningPlanet({ delta });
 
   renderer.render(scene, camera);
