@@ -57,6 +57,9 @@ module.exports = ({ mode = 'development' }) => ({
     path: path.join(__dirname, '/dist'),
     filename: 'client.js',
   },
+  experiments: {
+    topLevelAwait: true,
+  },
   module: {
     rules: [
       {

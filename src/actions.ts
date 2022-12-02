@@ -1,6 +1,7 @@
 import { Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { spinningHedron, updateSpinningHedron } from '@/scene/spinningHedron.scene';
+import { sunLight } from './scene/sunLight.scene';
+import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
 import { fluidTerrain, updateFluidTerrain } from '@/scene/fluidTerrain.scene';
 import { onResize } from '@/utility/canvasHelper.utility';
 
@@ -28,12 +29,13 @@ function setup(canvas: HTMLCanvasElement) {
   const [nearPlane, farPlane] = [0.1, 100];
 
   camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.set(0, 0, 10);
+  camera.position.set(0, 15, 50);
 
   controls = new OrbitControls(camera, canvas);
 
   scene.background = new Color('black');
-  scene.add(spinningHedron);
+  scene.add(sunLight);
+  scene.add(spinningPlanet);
   scene.add(fluidTerrain);
 
   renderer = new WebGLRenderer({ canvas });
@@ -81,7 +83,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   updateFluidTerrain();
-  updateSpinningHedron();
+  updateSpinningPlanet();
 
   renderer.render(scene, camera);
 }
