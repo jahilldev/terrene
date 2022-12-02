@@ -6,10 +6,10 @@ import { Mesh, SphereGeometry, TextureLoader, MeshPhysicalMaterial, Color } from
  *
  * -------------------------------- */
 
-import plentBumpAsset from '../assets/planetBump.jpg';
-import plentMapAsset from '../assets/planetMap.jpg';
-import plentSpecAsset from '../assets/planetSpec.jpg';
-import plentMaskAsset from '../assets/planetMask.png';
+import planetBumpAsset from '@/assets/planetBump.jpg';
+import planetMapAsset from '@/assets/planetMap.jpg';
+import planetSpecAsset from '@/assets/planetSpec.jpg';
+import planetMaskAsset from '@/assets/planetMask.png';
 
 /* -----------------------------------
  *
@@ -26,10 +26,10 @@ const planetGeometry = new SphereGeometry(10, 70, 70);
  * -------------------------------- */
 
 const planetTextures = {
-  bump: await new TextureLoader().loadAsync(plentBumpAsset),
-  map: await new TextureLoader().loadAsync(plentMapAsset),
-  spec: await new TextureLoader().loadAsync(plentSpecAsset),
-  planeTrailMask: await new TextureLoader().loadAsync(plentMaskAsset),
+  bump: await new TextureLoader().loadAsync(planetBumpAsset),
+  map: await new TextureLoader().loadAsync(planetMapAsset),
+  spec: await new TextureLoader().loadAsync(planetSpecAsset),
+  planeTrailMask: await new TextureLoader().loadAsync(planetMaskAsset),
 };
 
 /* -----------------------------------
