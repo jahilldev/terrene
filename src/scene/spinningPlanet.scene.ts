@@ -32,8 +32,6 @@ const planetTextures = {
   planeTrailMask: await new TextureLoader().loadAsync(plentMaskAsset),
 };
 
-console.log(plentMapAsset);
-
 /* -----------------------------------
  *
  * Material
@@ -66,8 +64,8 @@ const spinningPlanet = new Mesh(planetGeometry, planetMaterial);
  *
  * -------------------------------- */
 
-function updateSpinningPlanet() {
-  //   spinningPlanet.rotation.y += Math.PI * 1.25;
+function updateSpinningPlanet({ delta }) {
+  spinningPlanet.rotation.y += delta * 0.05;
   spinningPlanet.receiveShadow = true;
 }
 

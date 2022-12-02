@@ -1,4 +1,4 @@
-import { Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { sunLight } from './scene/sunLight.scene';
 import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
@@ -12,6 +12,7 @@ import { onResize } from '@/utility/canvasHelper.utility';
  * -------------------------------- */
 
 const scene = new Scene();
+const clock = new Clock();
 let renderer: WebGLRenderer;
 let camera: PerspectiveCamera;
 let controls: OrbitControls;
@@ -74,6 +75,8 @@ function stop() {
  * -------------------------------- */
 
 function animate() {
+  const delta = clock.getDelta();
+
   if (isPaused) {
     renderer.render(scene, camera);
 
@@ -83,7 +86,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   updateFluidTerrain();
-  updateSpinningPlanet();
+  updateSpinningPlanet({ delta });
 
   renderer.render(scene, camera);
 }
