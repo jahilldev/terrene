@@ -26,8 +26,18 @@ const fluidTerrain = new Mesh(terrainGeometry, terrainMaterial);
 
 /* -----------------------------------
  *
+ * Update
+ *
+ * -------------------------------- */
+
+function updateFluidTerrain() {
+  //
+}
+
+/* -----------------------------------
+ *
  * Export
  *
  * -------------------------------- */
 
-export { fluidTerrain };
+export { fluidTerrain, updateFluidTerrain };

@@ -26,8 +26,18 @@ const spinningHedron = new Mesh(hedronGeometry, hedronMaterial);
 
 /* -----------------------------------
  *
+ * Update
+ *
+ * -------------------------------- */
+
+function updateSpinningHedron() {
+  spinningHedron.rotation.y += 0.008;
+}
+
+/* -----------------------------------
+ *
  * Export
  *
  * -------------------------------- */
 
-export { spinningHedron };
+export { spinningHedron, updateSpinningHedron };

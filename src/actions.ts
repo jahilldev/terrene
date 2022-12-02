@@ -1,7 +1,7 @@
 import { Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { spinningHedron } from '@/scene/spinningHedron.scene';
-import { fluidTerrain } from '@/scene/fluidTerrain.scene';
+import { spinningHedron, updateSpinningHedron } from '@/scene/spinningHedron.scene';
+import { fluidTerrain, updateFluidTerrain } from '@/scene/fluidTerrain.scene';
 import { onResize } from '@/utility/canvasHelper.utility';
 
 /* -----------------------------------
@@ -73,13 +73,15 @@ function stop() {
 
 function animate() {
   if (isPaused) {
+    renderer.render(scene, camera);
+
     return;
   }
 
   requestAnimationFrame(animate);
 
-  spinningHedron.rotation.x += 0.008;
-  spinningHedron.rotation.y += 0.008;
+  updateFluidTerrain();
+  updateSpinningHedron();
 
   renderer.render(scene, camera);
 }
