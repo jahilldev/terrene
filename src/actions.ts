@@ -1,6 +1,7 @@
 import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { spaceBox } from './scene/spaceBox.scene';
+import { glowingStar, updateGlowingStar } from './scene/glowingStar.scene';
 import { sunLight } from './scene/sunLight.scene';
 import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
 import { onResize } from '@/utility/canvasHelper.utility';
@@ -30,7 +31,7 @@ function setup(canvas: HTMLCanvasElement) {
   const [nearPlane, farPlane] = [0.1, 3e3];
 
   camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.set(100, 0, 0);
+  camera.position.set(-95, 0, 20);
 
   controls = new OrbitControls(camera, canvas);
   controls.minDistance = 25;
@@ -38,6 +39,7 @@ function setup(canvas: HTMLCanvasElement) {
 
   scene.background = new Color('black');
   scene.add(spaceBox);
+  scene.add(glowingStar);
   scene.add(sunLight);
   scene.add(spinningPlanet);
 
@@ -86,7 +88,10 @@ function animate() {
   }
 
   requestAnimationFrame(animate);
+  updateGlowingStar();
   updateSpinningPlanet({ delta });
+
+  console.log(camera.position);
 }
 
 /* -----------------------------------

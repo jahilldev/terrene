@@ -1,4 +1,4 @@
-import { Color, DirectionalLight } from 'three';
+import { Color, DirectionalLight, SphereGeometry } from 'three';
 
 /* -----------------------------------
  *
@@ -14,7 +14,7 @@ const sunLight = new DirectionalLight(new Color('#ffffff').convertSRGBToLinear()
  *
  * -------------------------------- */
 
-sunLight.position.set(95, 10, -100);
+sunLight.position.set(750, 50, -750);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 512;
 sunLight.shadow.mapSize.height = 512;
