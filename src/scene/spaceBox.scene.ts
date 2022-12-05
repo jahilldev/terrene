@@ -6,12 +6,12 @@ import { BackSide, BoxGeometry, Mesh, MeshBasicMaterial, TextureLoader } from 't
  *
  * -------------------------------- */
 
-import spaceBoxFront from '@/assets/spaceBox/front.png';
-import spaceBoxBack from '@/assets/spaceBox/back.png';
-import spaceBoxLeft from '@/assets/spaceBox/left.png';
-import spaceBoxRight from '@/assets/spaceBox/right.png';
-import spaceBoxTop from '@/assets/spaceBox/top.png';
-import spaceBoxBottom from '@/assets/spaceBox/bottom.png';
+import spaceBoxFront from '@/assets/spaceBox/front.jpg';
+import spaceBoxBack from '@/assets/spaceBox/back.jpg';
+import spaceBoxLeft from '@/assets/spaceBox/left.jpg';
+import spaceBoxRight from '@/assets/spaceBox/right.jpg';
+import spaceBoxTop from '@/assets/spaceBox/top.jpg';
+import spaceBoxBottom from '@/assets/spaceBox/bottom.jpg';
 
 /* -----------------------------------
  *
