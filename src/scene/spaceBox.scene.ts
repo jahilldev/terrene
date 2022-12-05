@@ -23,18 +23,28 @@ const spaceGeometry = new BoxGeometry(2e3, 2e3, 2e3);
 
 /* -----------------------------------
  *
+ * Files
+ *
+ * -------------------------------- */
+
+const textureFiles = [
+  spaceBoxFront,
+  spaceBoxBack,
+  spaceBoxTop,
+  spaceBoxBottom,
+  spaceBoxLeft,
+  spaceBoxRight,
+];
+
+/* -----------------------------------
+ *
  * Textures
  *
  * -------------------------------- */
 
-const spaceTextures = {
-  front: await new TextureLoader().loadAsync(spaceBoxFront),
-  back: await new TextureLoader().loadAsync(spaceBoxBack),
-  top: await new TextureLoader().loadAsync(spaceBoxTop),
-  bottom: await new TextureLoader().loadAsync(spaceBoxBottom),
-  left: await new TextureLoader().loadAsync(spaceBoxLeft),
-  right: await new TextureLoader().loadAsync(spaceBoxRight),
-};
+const spaceTextures = await Promise.all(
+  textureFiles.map((file) => new TextureLoader().loadAsync(file))
+);
 
 /* -----------------------------------
  *
@@ -42,7 +52,7 @@ const spaceTextures = {
  *
  * -------------------------------- */
 
-const spaceMaterial = Object.values(spaceTextures).map(
+const spaceMaterial = spaceTextures.map(
   (texture) => new MeshBasicMaterial({ map: texture, side: BackSide })
 );
 
