@@ -31,7 +31,7 @@ function setup(canvas: HTMLCanvasElement) {
   const [nearPlane, farPlane] = [0.1, 3e3];
 
   camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.set(0, 15, 100);
+  camera.position.set(0, 0, 100);
 
   controls = new OrbitControls(camera, canvas);
   controls.minDistance = 25;
@@ -81,16 +81,14 @@ function stop() {
 function animate() {
   const delta = clock.getDelta();
 
-  if (isPaused) {
-    renderer.render(scene, camera);
+  renderer.render(scene, camera);
 
+  if (isPaused) {
     return;
   }
 
   requestAnimationFrame(animate);
   updateSpinningPlanet({ delta });
-
-  renderer.render(scene, camera);
 }
 
 /* -----------------------------------
