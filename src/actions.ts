@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { spaceBox } from './scene/spaceBox.scene';
 import { sunLight } from './scene/sunLight.scene';
 import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
-import { fluidTerrain } from '@/scene/fluidTerrain.scene';
 import { onResize } from '@/utility/canvasHelper.utility';
 
 /* -----------------------------------
@@ -41,7 +40,6 @@ function setup(canvas: HTMLCanvasElement) {
   scene.add(spaceBox);
   scene.add(sunLight);
   scene.add(spinningPlanet);
-  scene.add(fluidTerrain);
 
   renderer = new WebGLRenderer({ canvas });
   renderer.setSize(window.innerWidth, window.innerHeight);
