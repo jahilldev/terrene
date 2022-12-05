@@ -14,7 +14,7 @@ const sunLight = new DirectionalLight(new Color('#ffffff').convertSRGBToLinear()
  *
  * -------------------------------- */
 
-sunLight.position.set(10, 20, 10);
+sunLight.position.set(95, 10, -100);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 512;
 sunLight.shadow.mapSize.height = 512;

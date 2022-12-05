@@ -31,7 +31,7 @@ function setup(canvas: HTMLCanvasElement) {
   const [nearPlane, farPlane] = [0.1, 3e3];
 
   camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.set(0, 0, 100);
+  camera.position.set(100, 0, 0);
 
   controls = new OrbitControls(camera, canvas);
   controls.minDistance = 25;
