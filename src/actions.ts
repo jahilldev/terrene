@@ -1,8 +1,9 @@
 import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { spaceBox } from './scene/spaceBox.scene';
 import { sunLight } from './scene/sunLight.scene';
 import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
-import { fluidTerrain, updateFluidTerrain } from '@/scene/fluidTerrain.scene';
+import { fluidTerrain } from '@/scene/fluidTerrain.scene';
 import { onResize } from '@/utility/canvasHelper.utility';
 
 /* -----------------------------------
@@ -27,14 +28,17 @@ let isPaused = false;
 function setup(canvas: HTMLCanvasElement) {
   const fieldOfView = 35;
   const aspectRatio = window.innerWidth / window.innerHeight;
-  const [nearPlane, farPlane] = [0.1, 100];
+  const [nearPlane, farPlane] = [0.1, 3e3];
 
   camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-  camera.position.set(0, 15, 50);
+  camera.position.set(0, 15, 100);
 
   controls = new OrbitControls(camera, canvas);
+  controls.minDistance = 25;
+  controls.maxDistance = 750;
 
   scene.background = new Color('black');
+  scene.add(spaceBox);
   scene.add(sunLight);
   scene.add(spinningPlanet);
   scene.add(fluidTerrain);
