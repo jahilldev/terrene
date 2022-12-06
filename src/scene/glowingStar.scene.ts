@@ -23,6 +23,7 @@ const glowingStar = new Mesh(starGeometry);
  * -------------------------------- */
 
 function updateGlowingStar() {
+  glowingStar.layers.enable(1); // bloom
   glowingStar.position.set(750, 50, -750);
 }
 
