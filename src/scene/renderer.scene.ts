@@ -1,4 +1,4 @@
-import { Layers, MeshBasicMaterial, ShaderMaterial, Vector2 } from 'three';
+import { Layers, MeshBasicMaterial, ShaderMaterial, Vector2, WebGLRenderer } from 'three';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
@@ -10,17 +10,11 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
  *
  * -------------------------------- */
 
+let renderer: WebGLRenderer;
 let bloomLayer = new Layers();
 let bloomComposer: EffectComposer;
 let finalComposer: EffectComposer;
 const materials: Record<string, any> = {};
-
-/* -----------------------------------
- *
- * Material
- *
- * -------------------------------- */
-
 const darkMaterial = new MeshBasicMaterial({ color: 'black' });
 
 /* -----------------------------------
@@ -61,7 +55,11 @@ const fragmentShader = `
  *
  * -------------------------------- */
 
-function setupBloomEffect({ scene, camera, renderer }) {
+function setupRenderer({ canvas, scene, camera }): WebGLRenderer {
+  renderer = new WebGLRenderer({ canvas });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+
   bloomLayer.set(1);
 
   const renderPass = new RenderPass(scene, camera);
@@ -82,18 +80,17 @@ function setupBloomEffect({ scene, camera, renderer }) {
   bloomComposer.addPass(renderPass);
   bloomComposer.addPass(bloomPass);
 
-  const shaderPass = new ShaderPass(
-    new ShaderMaterial({
-      uniforms: {
-        baseTexture: { value: null },
-        bloomTexture: { value: bloomComposer.renderTarget2.texture },
-      },
-      vertexShader,
-      fragmentShader,
-      defines: {},
-    }),
-    'baseTexture'
-  );
+  const shaderMaterial = new ShaderMaterial({
+    uniforms: {
+      baseTexture: { value: null },
+      bloomTexture: { value: bloomComposer.renderTarget2.texture },
+    },
+    vertexShader,
+    fragmentShader,
+    defines: {},
+  });
+
+  const shaderPass = new ShaderPass(shaderMaterial, 'baseTexture');
 
   shaderPass.needsSwap = true;
 
@@ -101,6 +98,8 @@ function setupBloomEffect({ scene, camera, renderer }) {
 
   finalComposer.addPass(renderPass);
   finalComposer.addPass(shaderPass);
+
+  return renderer;
 }
 
 /* -----------------------------------
@@ -109,11 +108,24 @@ function setupBloomEffect({ scene, camera, renderer }) {
  *
  * -------------------------------- */
 
-function updateBloomEffect({ scene }) {
+function updateRenderer({ scene }) {
   scene.traverse(darkenMaterial);
+
   bloomComposer.render();
+
   scene.traverse(restoreMaterial);
+
   finalComposer.render();
+}
+
+/* -----------------------------------
+ *
+ * Resize
+ *
+ * -------------------------------- */
+
+function resizeRenderer() {
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 /* -----------------------------------
@@ -148,4 +160,4 @@ function restoreMaterial(obj) {
  *
  * -------------------------------- */
 
-export { setupBloomEffect, updateBloomEffect };
+export { setupRenderer, updateRenderer, resizeRenderer };

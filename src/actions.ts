@@ -1,17 +1,7 @@
-import {
-  Clock,
-  Color,
-  Layers,
-  MeshBasicMaterial,
-  PerspectiveCamera,
-  Scene,
-  ShaderMaterial,
-  Vector2,
-  WebGLRenderer,
-} from 'three';
+import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { spaceBox } from './scene/spaceBox.scene';
-import { setupBloomEffect, updateBloomEffect } from './scene/bloomEffect.scene';
+import { setupRenderer, updateRenderer, resizeRenderer } from './scene/renderer.scene';
 import { glowingStar, updateGlowingStar } from './scene/glowingStar.scene';
 import { sunLight } from './scene/sunLight.scene';
 import { spinningPlanet, updateSpinningPlanet } from '@/scene/spinningPlanet.scene';
@@ -54,11 +44,7 @@ function setup(canvas: HTMLCanvasElement) {
   scene.add(sunLight);
   scene.add(spinningPlanet);
 
-  renderer = new WebGLRenderer({ canvas });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-
-  setupBloomEffect({ scene, camera, renderer });
+  renderer = setupRenderer({ canvas, scene, camera });
 
   window.addEventListener('resize', () => onResize(resize), false);
 }
@@ -94,15 +80,16 @@ function stop() {
 function animate() {
   const delta = clock.getDelta();
 
-  updateBloomEffect({ scene });
+  updateRenderer({ scene });
 
   if (isPaused) {
     return;
   }
 
-  requestAnimationFrame(animate);
   updateGlowingStar();
   updateSpinningPlanet({ delta });
+
+  requestAnimationFrame(animate);
 }
 
 /* -----------------------------------
@@ -117,7 +104,7 @@ function resize() {
 
   controls.update();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  resizeRenderer();
 }
 
 /* -----------------------------------
