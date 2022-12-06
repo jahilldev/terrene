@@ -1,6 +1,6 @@
 import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { spaceBox } from './scene/spaceBox.scene';
+import { spaceBox, updateSpaceBox } from './scene/spaceBox.scene';
 import { setupRenderer, updateRenderer, resizeRenderer } from './scene/renderer.scene';
 import { glowingStar, updateGlowingStar } from './scene/glowingStar.scene';
 import { sunLight } from './scene/sunLight.scene';
@@ -85,6 +85,7 @@ function animate() {
     return;
   }
 
+  updateSpaceBox();
   updateGlowingStar();
   updateSpinningPlanet({ delta });
 

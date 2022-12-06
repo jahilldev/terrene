@@ -131,7 +131,6 @@ function resizeRenderer() {
   // finalComposer.setPixelRatio(window.devicePixelRatio);
 
   bloomPass.setSize(window.innerWidth, window.innerHeight);
-
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 

@@ -71,7 +71,7 @@ const spaceBox = new Mesh(spaceGeometry, spaceMaterial);
  * -------------------------------- */
 
 function updateSpaceBox() {
-  // no-op
+  // spaceBox.layers.enable(1); // bloom
 }
 
 /* -----------------------------------
