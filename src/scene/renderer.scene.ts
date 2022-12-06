@@ -12,6 +12,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 
 let renderer: WebGLRenderer;
 let bloomLayer = new Layers();
+let bloomPass: UnrealBloomPass;
 let bloomComposer: EffectComposer;
 let finalComposer: EffectComposer;
 const materials: Record<string, any> = {};
@@ -63,7 +64,8 @@ function setupRenderer({ canvas, scene, camera }): WebGLRenderer {
   bloomLayer.set(1);
 
   const renderPass = new RenderPass(scene, camera);
-  const bloomPass = new UnrealBloomPass(
+
+  bloomPass = new UnrealBloomPass(
     new Vector2(window.innerWidth, window.innerHeight),
     1.5,
     0.4,
@@ -72,7 +74,7 @@ function setupRenderer({ canvas, scene, camera }): WebGLRenderer {
 
   bloomPass.threshold = 0;
   bloomPass.strength = 5;
-  bloomPass.radius = 1;
+  bloomPass.radius = 0.8;
 
   bloomComposer = new EffectComposer(renderer);
 
@@ -125,6 +127,11 @@ function updateRenderer({ scene }) {
  * -------------------------------- */
 
 function resizeRenderer() {
+  // bloomComposer.setPixelRatio(window.devicePixelRatio);
+  // finalComposer.setPixelRatio(window.devicePixelRatio);
+
+  bloomPass.setSize(window.innerWidth, window.innerHeight);
+
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 

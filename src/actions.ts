@@ -15,7 +15,6 @@ import { onResize } from '@/utility/canvasHelper.utility';
 
 const scene = new Scene();
 const clock = new Clock();
-let renderer: WebGLRenderer;
 let camera: PerspectiveCamera;
 let controls: OrbitControls;
 let isPaused = false;
@@ -44,7 +43,7 @@ function setup(canvas: HTMLCanvasElement) {
   scene.add(sunLight);
   scene.add(spinningPlanet);
 
-  renderer = setupRenderer({ canvas, scene, camera });
+  setupRenderer({ canvas, scene, camera });
 
   window.addEventListener('resize', () => onResize(resize), false);
 }
