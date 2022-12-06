@@ -1,4 +1,4 @@
-import { Mesh, SphereGeometry } from 'three';
+import { Mesh, MeshBasicMaterial, SphereGeometry } from 'three';
 
 /* -----------------------------------
  *
@@ -10,11 +10,21 @@ const starGeometry = new SphereGeometry(10, 70, 70);
 
 /* -----------------------------------
  *
+ * Material
+ *
+ * -------------------------------- */
+
+const starMaterial = new MeshBasicMaterial({
+  color: 0xffffff,
+});
+
+/* -----------------------------------
+ *
  * Mesh
  *
  * -------------------------------- */
 
-const glowingStar = new Mesh(starGeometry);
+const glowingStar = new Mesh(starGeometry, starMaterial);
 
 /* -----------------------------------
  *

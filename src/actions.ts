@@ -1,4 +1,4 @@
-import { Clock, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { Clock, Color, PerspectiveCamera, Scene } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { spaceBox, updateSpaceBox } from './scene/spaceBox.scene';
 import { setupRenderer, updateRenderer, resizeRenderer } from './scene/renderer.scene';
@@ -79,12 +79,11 @@ function stop() {
 function animate() {
   const delta = clock.getDelta();
 
-  updateRenderer({ scene });
-
   if (isPaused) {
     return;
   }
 
+  updateRenderer({ scene });
   updateSpaceBox();
   updateGlowingStar();
   updateSpinningPlanet({ delta });
